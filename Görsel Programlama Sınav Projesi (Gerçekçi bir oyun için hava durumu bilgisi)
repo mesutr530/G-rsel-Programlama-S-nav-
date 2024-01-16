@@ -1,0 +1,41 @@
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+
+class Program
+{
+    static async Task Main()
+    {
+        string apiKey = "2fa07dcfbb971debb84d810ab1dceae4";
+        string city = "Şehir Yazınız";
+
+        await GetWeatherAsync(apiKey, city);
+    }
+
+    static async Task GetWeatherAsync(string apiKey, string city)
+    {
+        using (HttpClient client = new HttpClient())
+        {
+            try
+            {
+                string apiUrl = $"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={apiKey}&units=metric";
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string data = await response.Content.ReadAsStringAsync();
+                    // Handle the weather data as needed (parse JSON, etc.)
+                    Console.WriteLine(data);
+                }
+                else
+                {
+                    Console.WriteLine($"Error: {response.StatusCode} - {response.ReasonPhrase}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Exception: {ex.Message}");
+            }
+        }
+    }
+}
