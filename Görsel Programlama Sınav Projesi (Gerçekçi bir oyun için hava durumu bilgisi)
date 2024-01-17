@@ -6,8 +6,8 @@ class Program
 {
     static async Task Main()
     {
-        string apiKey = "2fa07dcfbb971debb84d810ab1dceae4";
-        string city = "Şehir Yazınız";
+        string apiKey = "2fa07dcfbb971debb84d810ab1dceae4"; // burda kullanıcılar anlık hava durumu almak için kendi apikey'lerini girmeliler
+        string city = "Buraya Şehir Yazınız";
 
         await GetWeatherAsync(apiKey, city);
     }
@@ -24,7 +24,7 @@ class Program
                 if (response.IsSuccessStatusCode)
                 {
                     string data = await response.Content.ReadAsStringAsync();
-                    // Handle the weather data as needed (parse JSON, etc.)
+                   
                     Console.WriteLine(data);
                 }
                 else
@@ -39,3 +39,5 @@ class Program
         }
     }
 }
+
+
